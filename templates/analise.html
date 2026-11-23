@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block titulo %}Análise espacial · GeoGarimpo Brasil{% endblock %}
+{% block cabecalho %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mapa.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+{% block conteudo %}
+<section class="abertura compacta"><div><p class="rotulo">Mudança territorial</p><h1>Análise espacial</h1><p>Consulte novas detecções{% if redes_habilitadas %} e distâncias mínimas entre as manchas e as redes mapeadas{% endif %}.</p></div></section>
+<section class="painel bloco">
+  <h2>Parâmetros da consulta</h2>
+  <form id="filtros-analise" class="formulario analise-formulario">
+    <label>Resultado<select id="tipo-analise"><option value="expansao" {% if not redes_habilitadas %}selected{% endif %}>Expansão anual</option><option value="proximidade" {% if redes_habilitadas %}selected{% else %}disabled{% endif %}>Proximidade</option></select></label>
+    <label>Ano<select id="ano-analise" disabled><option value="">Sem anos carregados</option></select></label>
+    <label>UF<select id="uf-analise"><option value="">Brasil</option>{% for uf in ufs %}<option>{{ uf }}</option>{% endfor %}</select></label>
+    <label>Terra indígena<select id="terra-analise"><option value="">Todas as terras</option></select></label>
+    <fieldset id="opcoes-proximidade" class="formulario sem-borda" {% if not redes_habilitadas %}hidden disabled{% endif %}>
+      <legend class="somente-leitor">Parâmetros de proximidade</legend>
+      <label>Referência<select id="alvo-analise"><option value="rios">Rios</option><option value="estradas">Estradas</option><option value="pistas">Pistas de pouso</option></select></label>
+      <label>Manchas<select id="manchas-analise"><option value="detectada">Área detectada</option><option value="nova">Somente área nova</option></select></label>
+      <label>Raio do buffer (m)<input id="raio-analise" type="number" min="1" max="1000000" value="1000" required></label>
+    </fieldset>
+    <button class="botao" type="submit" id="buscar-analise" disabled>Consultar</button>
+  </form>
+  <p class="nota">{% if redes_habilitadas %}O raio seleciona manchas inteiras pela distância mínima. Proximidade espacial, por si só, é insuficiente para testar causalidade.{% else %}A análise de proximidade está temporariamente indisponível.{% endif %}</p>
+</section>
+<section class="painel bloco resultados" aria-labelledby="titulo-resultados">
+  <div class="linha-cabecalho"><h2 id="titulo-resultados">Resultados</h2>
+    <div class="acoes">
+      <button id="exportar-geojson" class="botao secundario" type="button" disabled>Baixar GeoJSON</button>
+      <button id="exportar-csv" class="botao secundario" type="button" disabled>Baixar CSV</button>
+    </div>
+  </div>
+  <p id="estado-analise" class="estado" role="status">Consultando os anos disponíveis…</p>
+  <div id="mapa-analise" aria-label="Mapa das manchas na página de resultados"></div>
+  <div class="rolagem" id="tabela-analise" hidden><table>
+    <caption class="somente-leitor">Resultados espaciais da página atual</caption>
+    <thead><tr><th>Mancha</th><th>Ano</th><th>Área (ha)</th><th id="titulo-distancia">Distância (m)</th></tr></thead>
+    <tbody id="linhas-analise"></tbody>
+  </table></div>
+  <div class="acoes paginacao"><button id="anterior-analise" type="button" disabled>Página anterior</button><button id="proxima-analise" type="button" disabled>Próxima página</button></div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/analise.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<section class="heroi">
+  <div class="heroi-texto">
+    <p class="rotulo">Observatório territorial · Brasil</p>
+    <h1>Garimpo em terras indígenas no Brasil</h1>
+    <p>Acompanhe as áreas detectadas por satélite nos anos disponíveis e consulte os recortes por terra indígena e UF.</p>
+    <div class="acoes"><a class="botao" href="{{ url_for('paginas.mapa') }}">Explorar o mapa</a><a class="botao secundario" href="{{ url_for('paginas.estatisticas') }}">Consultar séries</a></div>
+  </div>
+  <div class="heroi-visual" aria-hidden="true"><span>GEO<br>BR</span></div>
+</section>
+<section class="dados-inicio painel" aria-labelledby="titulo-dados">
+  <div><h2 id="titulo-dados">Indicadores nacionais</h2><p id="estado-inicio" role="status">Consultando a série disponível…</p></div>
+  <dl class="indicadores" id="indicadores-inicio" hidden></dl>
+</section>
+<section class="atalhos" aria-label="Recursos">
+  <a class="painel" href="{{ url_for('paginas.mapa') }}"><h2>Mapa nacional</h2><p>Compare anos e explore as camadas por terra indígena e UF.</p></a>
+  <a class="painel" href="{{ url_for('paginas.estatisticas') }}"><h2>Série histórica</h2><p>Consulte a área detectada, as novas detecções e a variação líquida.</p></a>
+  <a class="painel" href="{{ url_for('paginas.analise') }}"><h2>Análise espacial</h2><p>Consulte os resultados de expansão disponíveis para exportação.</p></a>
+</section>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/graficos.js') }}"></script>{% endblock %}

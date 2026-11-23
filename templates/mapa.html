@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block titulo %}Mapa nacional · GeoGarimpo Brasil{% endblock %}
+{% block cabecalho %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leaflet.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mapa.css') }}">
+{% endblock %}
+{% block conteudo %}
+<section class="abertura compacta">
+  <div><p class="rotulo">Exploração territorial</p><h1>Mapa nacional</h1><p>Use os filtros e a linha do tempo para comparar as áreas mapeadas.</p></div>
+  <button class="botao secundario" type="button" id="enquadrar">Enquadrar Brasil</button>
+</section>
+<div class="grade-mapa">
+  <aside class="painel filtros" aria-label="Filtros e camadas">
+    <h2>Filtros</h2>
+    <label for="uf-mapa">Unidade federativa</label>
+    <select id="uf-mapa"><option value="">Todas as UFs</option>{% for uf in ufs %}<option>{{ uf }}</option>{% endfor %}</select>
+    <label for="terra-mapa">Terra indígena</label>
+    <select id="terra-mapa"><option value="">Todas as terras indígenas</option></select>
+    <label for="classe-mapa">Classe de garimpo</label>
+    <select id="classe-mapa" disabled><option value="">Todas as classes</option></select>
+    <fieldset class="camadas">
+      <legend>Camadas e legenda</legend>
+      <label><input type="checkbox" data-camada="terras" checked><i class="amostra terras"></i> Terras indígenas</label>
+      <label><input type="checkbox" data-camada="garimpos" checked><i class="amostra garimpos"></i> Garimpos mapeados</label>
+      <label><input type="checkbox" data-camada="rios" {% if not redes_habilitadas %}disabled{% endif %}><i class="amostra rios"></i> Rios</label>
+      <label><input type="checkbox" data-camada="estradas" {% if not redes_habilitadas %}disabled{% endif %}><i class="amostra estradas"></i> Estradas</label>
+      <label><input type="checkbox" data-camada="pistas" {% if not redes_habilitadas %}disabled{% endif %}><i class="amostra pistas"></i> Pistas de pouso</label>
+    </fieldset>
+    <p class="nota">{% if redes_habilitadas %}As redes aparecem em recortes locais. Aproxime o mapa para consultá-las.{% else %}Rios, estradas e pistas de pouso estão temporariamente indisponíveis.{% endif %}</p>
+    <button type="button" class="botao secundario" id="mais-feicoes" hidden>Carregar mais feições</button>
+  </aside>
+  <section class="painel quadro-mapa" aria-label="Mapa e animação temporal">
+    <div id="mapa" aria-label="Mapa interativo do Brasil"></div>
+    <div class="tempo">
+      <div class="tempo-cabecalho"><label for="ano-mapa">Ano de detecção</label><output id="ano-visivel" for="ano-mapa">Sem série carregada</output></div>
+      <input id="ano-mapa" type="range" min="0" max="1" value="0" disabled aria-describedby="ano-visivel">
+      <div class="tempo-controles">
+        <button type="button" id="voltar-ano" disabled>Voltar</button>
+        <button type="button" id="reproduzir" disabled>Reproduzir</button>
+        <button type="button" id="pausar" disabled>Pausar</button>
+        <button type="button" id="avancar-ano" disabled>Avançar</button>
+        <label for="velocidade">Intervalo</label>
+        <select id="velocidade"><option value="2200">2,2 s</option><option value="1200" selected>1,2 s</option><option value="600">0,6 s</option></select>
+      </div>
+      <p id="estado-mapa" class="nota" role="status">Consultando camadas…</p>
+      <p id="estado-base" class="nota" role="status"></p>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/mapa.js') }}"></script>
+{% endblock %}

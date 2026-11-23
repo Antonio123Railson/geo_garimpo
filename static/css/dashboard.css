@@ -1,0 +1,16 @@
+.linha-cabecalho, .formulario { display: flex; flex-wrap: wrap; gap: .65rem; align-items: end; }
+.linha-cabecalho { justify-content: space-between; margin-bottom: .85rem; }
+.linha-cabecalho h2 { margin-bottom: .4rem; }
+.formulario label { display: grid; gap: .2rem; font-weight: 620; font-size: .88rem; max-width: 240px; }
+.formulario select, .formulario input { max-width: 100%; min-width: 6rem; min-height: 40px; padding: .38rem .6rem; border: 1px solid var(--linha); border-radius: 7px; background: white; color: var(--texto); }
+.sem-borda { padding: 0; border: 0; margin: 0; align-items: end; }
+.estado { border-left: 3px solid #7da795; background: #edf5f0; color: #325847; padding: .65rem .85rem; }
+.quadro-grafico { height: 330px; margin-block: 1rem; }
+.ranking-grafico { height: 420px; }
+.rolagem { overflow-x: auto; margin-top: .85rem; }
+table { text-align: left; border-collapse: collapse; width: 100%; font-size: .94rem; }
+th, td { padding: .52rem .65rem; border-bottom: 1px solid var(--linha); white-space: nowrap; }
+th { color: #3b5f4f; background: #f3f7f4; }
+summary { cursor: pointer; color: var(--verde); font-weight: 650; }
+.analise-formulario { margin-bottom: .78rem; }
+.paginacao { margin-top: .8rem; }

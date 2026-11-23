@@ -1,0 +1,91 @@
+:root {
+  color-scheme: light;
+  --fundo: #f2f5f3;
+  --papel: #fff;
+  --texto: #17312a;
+  --suave: #4d655d;
+  --linha: #d2dfd8;
+  --verde: #146349;
+  --escuro: #102d25;
+  --dourado: #faab64;
+  --raio: 16px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  line-height: 1.55;
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; color: var(--texto); background: var(--fundo); }
+a { color: var(--verde); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible {
+  outline: 3px solid #a05a22; outline-offset: 3px;
+}
+.largura { width: min(100% - 3rem, 1320px); margin-inline: auto; }
+.barra { background: var(--escuro); color: #fff; }
+.navegacao, .rodape { display: flex; justify-content: space-between; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+.navegacao { min-height: 72px; padding-block: .65rem; }
+.marca { display: flex; align-items: center; gap: .75rem; color: #fff; text-decoration: none; font-weight: 740; font-size: 1.15rem; }
+.simbolo { display: inline-block; width: 26px; height: 26px; border: 1px solid #7bb99f; border-radius: 50%; position: relative; }
+.simbolo::after { content: ""; position: absolute; inset: 5px; border: 1px solid #7bb99f; border-radius: 50%; background: radial-gradient(circle, #ffd195 2px, transparent 3px); }
+nav { display: flex; gap: .35rem; flex-wrap: wrap; }
+nav a { color: #d8eae1; text-decoration: none; padding: .45rem .72rem; border-radius: 7px; font-size: .94rem; }
+nav a:hover, nav a[aria-current] { color: #fff; background: #285146; }
+main { min-height: calc(100vh - 142px); padding-block: clamp(1.25rem, 4vw, 3rem); }
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-size: clamp(2.2rem, 5vw, 4.1rem); line-height: 1.05; letter-spacing: -.045em; margin-bottom: .65rem; }
+h2 { font-size: clamp(1.17rem, 2.1vw, 1.5rem); letter-spacing: -.02em; line-height: 1.2; margin-bottom: .85rem; }
+p { margin-bottom: .85rem; }
+.rotulo { color: var(--verde); font-size: .84rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.abertura { margin-bottom: 1.5rem; }
+.abertura p:last-child { margin-bottom: 0; color: var(--suave); }
+.compacta { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; }
+.compacta h1 { font-size: clamp(2.2rem, 4vw, 3.55rem); }
+.heroi { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); background: var(--escuro); color: white; border-radius: 20px; overflow: hidden; }
+.heroi-texto { padding: clamp(1.75rem, 6vw, 5.2rem); }
+.heroi .rotulo { color: #a6d9c2; }
+.heroi h1 { max-width: 14ch; margin-bottom: 1.1rem; }
+.heroi p:not(.rotulo) { color: #d5e8de; max-width: 52ch; font-size: 1.08rem; }
+.heroi-visual {
+  min-height: 150px; display: grid; align-items: center; justify-items: center; overflow: hidden;
+  background-color: #153d32;
+  background-image: radial-gradient(ellipse at 62% 45%, transparent 20%, #102d2577 66%, #102d25 100%),
+    repeating-radial-gradient(ellipse at 59% 44%, transparent 0 14px, #80bc9d55 15px 16px, transparent 17px 24px),
+    repeating-linear-gradient(0deg, transparent 0 42px, #88bda733 43px 44px),
+    repeating-linear-gradient(90deg, transparent 0 42px, #88bda733 43px 44px);
+}
+.heroi-visual span { display: grid; place-content: center; width: 146px; height: 146px; border-radius: 50%; border: 1px solid #98d2b6; background: #122f27eb; color: #c0ead4; font-size: 2rem; line-height: .93; font-weight: 750; letter-spacing: -.065em; text-align: center; }
+.acoes { display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; }
+.heroi .acoes { margin-top: 1.5rem; }
+button, select, input { font: inherit; }
+button, .botao { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; border: 1px solid var(--linha); border-radius: 8px; background: white; color: var(--texto); padding: .42rem .82rem; cursor: pointer; text-decoration: none; font-size: .94rem; font-weight: 650; }
+.botao { background: var(--verde); border-color: var(--verde); color: white; }
+.botao.secundario { background: white; border-color: var(--linha); color: var(--verde); }
+button:hover:not(:disabled), .botao:hover { filter: brightness(.94); }
+button:disabled { opacity: .52; cursor: default; }
+.heroi .botao { background: #b8e5cf; border-color: #b8e5cf; color: #12362a; }
+.heroi .secundario { background: transparent; border-color: #749d8e; color: white; }
+.painel { background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio); }
+.bloco { padding: clamp(1rem, 2.7vw, 1.75rem); margin-bottom: 1rem; }
+.dados-inicio { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; margin-block: 1.1rem; padding: 1rem 1.35rem; }
+.dados-inicio h2 { margin-bottom: .25rem; }
+.dados-inicio p { margin-bottom: 0; color: var(--suave); }
+.atalhos, .grade-sobre { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.atalhos a { padding: 1.25rem; text-decoration: none; color: var(--texto); }
+.atalhos a:hover { border-color: #527a68; }
+.atalhos p, .referencias p { color: var(--suave); margin-bottom: 0; }
+.indicadores { display: flex; flex-wrap: wrap; gap: .8rem 1.8rem; margin: 0; }
+.indicadores dt { color: var(--suave); font-size: .88rem; }
+.indicadores dd { margin: 0; font-size: 1.36rem; font-weight: 700; }
+.grade-sobre { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+.referencias { padding-left: 1.25rem; }
+.referencias li { margin-bottom: .65rem; }
+.nota { color: var(--suave); font-size: .9rem; }
+footer { background: #e3ebe6; color: var(--suave); padding-block: 1.15rem; }
+.pular, .somente-leitor { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; white-space: nowrap; }
+.pular:focus { position: fixed; z-index: 2000; top: 1rem; left: 1rem; clip-path: none; width: auto; height: auto; background: white; padding: .6rem; }
+@media (max-width: 760px) {
+  .largura { width: calc(100% - 1.25rem); }
+  .navegacao { gap: .45rem; }
+  .atalhos, .grade-sobre { grid-template-columns: 1fr; }
+  .heroi { grid-template-columns: 1fr; }
+  .heroi-visual span { width: 94px; height: 94px; font-size: 1.5rem; }
+}

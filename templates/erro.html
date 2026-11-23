@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block titulo %}Erro {{ codigo }} · GeoGarimpo Brasil{% endblock %}
+{% block conteudo %}
+<section class="abertura"><p class="rotulo">Erro {{ codigo }}</p><h1>{{ mensagem }}</h1>
+<a class="botao" href="{{ url_for('paginas.inicio') }}">Voltar ao início</a></section>
+{% endblock %}

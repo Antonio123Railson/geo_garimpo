@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}GeoGarimpo Brasil{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+  {% block cabecalho %}{% endblock %}
+</head>
+<body>
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+<header class="barra">
+  <div class="largura navegacao">
+    <a class="marca" href="{{ url_for('paginas.inicio') }}"><span class="simbolo" aria-hidden="true"></span>GeoGarimpo Brasil</a>
+    <nav aria-label="Navegação principal">
+      {% for destino, texto in [('inicio', 'Início'), ('mapa', 'Mapa'), ('estatisticas', 'Estatísticas'), ('analise', 'Análise'), ('sobre', 'Sobre')] %}
+      {% set rota = 'paginas.' ~ destino %}
+      <a href="{{ url_for(rota) }}"{% if request.endpoint == rota %} aria-current="page"{% endif %}>{{ texto }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>
+<main id="conteudo" class="largura">{% block conteudo %}{% endblock %}</main>
+<footer><div class="largura rodape"><span>GeoGarimpo Brasil</span><a href="{{ url_for('paginas.sobre') }}">Fontes, créditos e metodologia</a></div></footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block titulo %}Estatísticas · GeoGarimpo Brasil{% endblock %}
+{% block cabecalho %}<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">{% endblock %}
+{% block conteudo %}
+<section class="abertura compacta"><div><p class="rotulo">Áreas dentro de terras indígenas</p><h1>Estatísticas</h1><p>Compare a extensão detectada, as novas detecções e a variação líquida entre anos.</p></div></section>
+<section class="painel bloco" aria-labelledby="titulo-serie">
+  <div class="linha-cabecalho">
+    <h2 id="titulo-serie">Série histórica</h2>
+    <form id="filtros-serie" class="formulario">
+      <label>UF<select id="uf-serie"><option value="">Brasil</option>{% for uf in ufs %}<option>{{ uf }}</option>{% endfor %}</select></label>
+      <label>Terra indígena<select id="terra-serie"><option value="">Todas as terras</option></select></label>
+      <button class="botao" type="submit">Consultar</button>
+    </form>
+  </div>
+  <p id="estado-serie" class="estado" role="status">Consultando a série disponível…</p>
+  <dl class="indicadores" id="indicadores-serie" hidden></dl>
+  <div class="quadro-grafico" id="quadro-serie" hidden><canvas id="grafico-serie" role="img" aria-label="Série de área detectada, área nova e variação líquida em hectares"></canvas></div>
+  <details id="detalhes-serie" hidden><summary>Tabela da série histórica</summary>
+    <div class="rolagem"><table><caption class="somente-leitor">Valores anuais da série</caption>
+      <thead><tr><th>Ano</th><th>Detectada (ha)</th><th>Detectada (km²)</th><th>Nova (ha)</th><th>Variação líquida (ha)</th><th>Crescimento (%)</th></tr></thead>
+      <tbody id="linhas-serie"></tbody>
+    </table></div>
+  </details>
+</section>
+<section class="painel bloco" aria-labelledby="titulo-ranking">
+  <div class="linha-cabecalho">
+    <h2 id="titulo-ranking">Ranking por área detectada</h2>
+    <form id="filtros-ranking" class="formulario">
+      <label>Ano<select id="ano-ranking" disabled><option value="">Sem anos carregados</option></select></label>
+      <label>Agrupar por<select id="escopo-ranking"><option value="terra">Terra indígena</option><option value="uf">Unidade federativa</option></select></label>
+      <button class="botao" id="buscar-ranking" type="submit" disabled>Comparar</button>
+    </form>
+  </div>
+  <p class="nota">A posição no ranking expressa a área detectada por satélite. A classificação jurídica requer consulta própria.</p>
+  <p id="estado-ranking" class="estado" role="status">Consultando os anos disponíveis…</p>
+  <div class="quadro-grafico ranking-grafico" id="quadro-ranking" hidden><canvas id="grafico-ranking" role="img" aria-label="Comparação por área detectada em hectares"></canvas></div>
+  <div class="rolagem" id="tabela-ranking" hidden><table>
+    <caption class="somente-leitor">Ranking por área detectada</caption>
+    <thead><tr><th>Território</th><th>Área (ha)</th><th>Área (km²)</th></tr></thead><tbody id="linhas-ranking"></tbody>
+  </table></div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chart.umd.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/graficos.js') }}"></script>
+{% endblock %}

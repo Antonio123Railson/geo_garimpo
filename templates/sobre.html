@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titulo %}Sobre · GeoGarimpo Brasil{% endblock %}
+{% block conteudo %}
+<section class="abertura compacta"><div><p class="rotulo">Projeto acadêmico</p><h1>Sobre o GeoGarimpo Brasil</h1><p>Uma plataforma nacional de consulta e análise das áreas de garimpo detectadas dentro de terras indígenas.</p></div></section>
+<div class="grade-sobre">
+  <section class="painel bloco">
+    <h2>Objetivo e método</h2>
+    <p>O estudo cruza a série anual MapBiomas com um recorte territorial da FUNAI. As áreas são calculadas em projeção equivalente e a expansão corresponde à área do ano selecionado ausente no ano imediatamente anterior.</p>
+    <p>As distâncias são medidas entre as geometrias das manchas e da infraestrutura. O cálculo usa metros sobre o elipsoide e registra a edição das redes consideradas.</p>
+    <h2>Limitações</h2>
+    <p>A delimitação adotada é a da edição importada da FUNAI. A série daí resultante descreve o mesmo recorte ao longo do tempo e pode divergir da situação administrativa histórica. A detecção depende da resolução, das classes e da qualidade das imagens.</p>
+    <p>As redes são observadas na data de aquisição. A associação espacial exige investigação adicional para inferir causalidade, data de instalação ou regularidade jurídica. Uma mancha pode ser dividida em partes para processamento.</p>
+    <h2>Atualização da base</h2>
+    <p id="estado-fontes" role="status">Consultando os registros de aquisição…</p>
+    <ul id="lista-fontes"></ul>
+  </section>
+  <section class="painel bloco">
+    <h2>Fontes e créditos</h2>
+    <ul class="referencias">
+      <li><a href="https://brasil.mapbiomas.org/iniciativas-e-produtos/cobertura-e-uso-da-terra/mineracao/substancia-minerada/">MapBiomas · Substância Minerada</a><p>Série anual e legenda de atividade, estado da superfície e substância.</p></li>
+      <li><a href="https://www.gov.br/funai/pt-br/atuacao/terras-indigenas/geoprocessamento-e-mapas">FUNAI · Terras Indígenas</a><p>Limites e informações territoriais.</p></li>
+      <li><a href="https://www.gov.br/ana/pt-br/assuntos/noticias-e-eventos/noticias/base-de-dados-geoespaciais-da-ana-permite-gestao-mais-eficiente-das-bacias-hidrograficas">ANA · Base Hidrográfica Ottocodificada</a><p>Trechos de drenagem.</p></li>
+      <li><a href="https://www.openstreetmap.org/copyright">© colaboradores do OpenStreetMap</a><p>Estradas, pistas de pouso e mapa-base.</p></li>
+      <li><a href="https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html">IBGE · Malhas Territoriais</a><p>Limites das unidades federativas.</p></li>
+    </ul>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script type="module" src="{{ url_for('static', filename='js/graficos.js') }}"></script>{% endblock %}

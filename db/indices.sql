@@ -1,0 +1,17 @@
+BEGIN;
+CREATE INDEX IF NOT EXISTS terras_indigenas_geom_gix ON terras_indigenas USING gist (geom);
+CREATE INDEX IF NOT EXISTS unidades_federativas_geom_gix ON unidades_federativas USING gist (geom);
+CREATE INDEX IF NOT EXISTS garimpos_anuais_geom_gix ON garimpos_anuais USING gist (geom);
+CREATE INDEX IF NOT EXISTS garimpos_anuais_ano_id_idx ON garimpos_anuais (ano, id);
+CREATE INDEX IF NOT EXISTS rios_geom_gix ON rios USING gist (geom);
+CREATE INDEX IF NOT EXISTS rios_geog_gix ON rios USING gist ((geom::geography));
+CREATE INDEX IF NOT EXISTS estradas_geom_gix ON estradas USING gist (geom);
+CREATE INDEX IF NOT EXISTS estradas_geog_gix ON estradas USING gist ((geom::geography));
+CREATE INDEX IF NOT EXISTS pistas_pouso_geom_gix ON pistas_pouso USING gist (geom);
+CREATE INDEX IF NOT EXISTS pistas_pouso_geog_gix ON pistas_pouso USING gist ((geom::geography));
+CREATE INDEX IF NOT EXISTS estatisticas_escopo_ano_idx ON estatisticas_anuais (escopo, ano, area_detectada_ha DESC);
+CREATE INDEX IF NOT EXISTS estatisticas_terra_ano_idx ON estatisticas_anuais (terra_id, ano);
+CREATE INDEX IF NOT EXISTS manchas_indigenas_geom_gix ON manchas_indigenas USING gist (geom);
+CREATE INDEX IF NOT EXISTS manchas_indigenas_ano_tipo_idx ON manchas_indigenas (ano, tipo, id);
+CREATE INDEX IF NOT EXISTS analises_proximidade_alvo_dist_idx ON analises_proximidade (alvo, distancia_m, mancha_id);
+COMMIT;
